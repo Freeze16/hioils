@@ -1,0 +1,5 @@
+fastapi[standard]
+pydantic
+jinja2
+pytest
+uvicorn
