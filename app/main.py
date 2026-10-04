@@ -1,8 +1,10 @@
 from fastapi import FastAPI
 from fastapi.routing import APIRoute
+from fastapi.staticfiles import StaticFiles
 
-from aoo.api.main import api_router
-from app.core.config import settings
+from api.main import api_router
+from core.config import settings
+
 
 FRONTEND_DIR = "frontend"
 
@@ -16,6 +18,5 @@ app = FastAPI(
     generate_unique_id_function=custom_generate_unique_id,
 )
 
-
 app.include_router(api_router, prefix=settings.API_V1_STR)
-app.frontend("/", directory=FRONTEND_DIR)
+app.mount("/", StaticFiles(directory=FRONTEND_DIR, html=True), name="frontend")
